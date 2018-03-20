@@ -14,6 +14,7 @@ namespace Microwave.Application
             //var door = new Door();
             // ...
             // etc.
+            //
 
             // Simulate user activities
             //powerButton.Press();
