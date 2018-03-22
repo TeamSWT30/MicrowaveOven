@@ -37,10 +37,11 @@ namespace MicrowaveOvenClasses.Controllers
             timer.TimerTick += new EventHandler(OnTimerTick);
         }
 
-        public void StartCooking(int power, int time)
+        public void StartCooking(int power, int secTime)
         {
+            int msecTime = secTime * 1000; 
             myPowerTube.TurnOn(power);
-            myTimer.Start(time);
+            myTimer.Start(msecTime);
             isCooking = true;
         }
 
@@ -63,7 +64,7 @@ namespace MicrowaveOvenClasses.Controllers
 
         public void OnTimerTick(object sender, EventArgs e)
         {
-            int remaining = myTimer.TimeRemaining;
+            int remaining = myTimer.TimeRemaining/1000;
             myDisplay.ShowTime(remaining/60, remaining % 60);
         }
     }

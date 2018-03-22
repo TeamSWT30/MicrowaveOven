@@ -12,21 +12,27 @@ namespace MicrowaveOven.Test.Integration
     [TestFixture]
     public class IT1_PowerTubeOutput
     {
-        private IOutput _output;
-        private IPowerTube _uut;
+        private IOutput output;
+        private IPowerTube uut;
 
         [SetUp]
         public void SetUp()
         {
-            _output = new Output();
-            _uut = new PowerTube(_output);
+            output = new Output();
+            uut = new PowerTube(output);
         }
 
-        [TestCase(50)]
-        public void TurnOn_PowerOK_Allowed(int power)
+        [TestCase(1)]
+        [TestCase(99)]
+        public void TurnOn_WasOff_CorrectOutput(int power)
         {
-            _uut.TurnOn(power);
-            
+            uut.TurnOn(power);
+        }
+
+        [Test]
+        public void TurnOff_WasOff_NoOutput()
+        {
+            uut.TurnOff();
         }
     }
 }
