@@ -82,7 +82,7 @@ namespace MicrowaveOven.Test.Integration
         }
 
         [Test]
-        public void OnPowerPressed_16Times_ShowPower()
+        public void OnPowerPressed_15Times_ShowPower()
         {
             _driverDoor.Open();
             _driverDoor.Close();
@@ -134,7 +134,7 @@ namespace MicrowaveOven.Test.Integration
         {
             _driverDoor.Open();
             _driverDoor.Close();
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 14; i++)
             {
                 _driverPowerButton.Press();
             }
@@ -143,6 +143,96 @@ namespace MicrowaveOven.Test.Integration
 
             _output.Received().OutputLine($"PowerTube works with 100 %");
         }
+
+        [Test]
+        public void OnStartCancelPressed_DontClear()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverTimeButton.Press();
+            _driverStartCancelButton.Press();
+
+            _output.DidNotReceive().OutputLine($"Display cleared");
+        }
+
+        [Test]
+        public void OnStartCancelPressed_DuringSetUp_DisplayCleared()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverStartCancelButton.Press();
+
+            _output.Received().OutputLine($"Display cleared");
+        }
+
+        [Test]
+        public void OnDoorOpened_DuringSetup_DisplayBlanked()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverDoor.Open();
+
+            _output.Received().OutputLine($"Display cleared");
+        }
+
+        [Test]
+        public void OnDoorOpened_DuringSetup2_DisplayBlanked()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverTimeButton.Press();
+            _driverDoor.Open();
+
+            _output.Received().OutputLine($"Display cleared");
+        }
+
+        [Test]
+        public void OnStartCancelPressed_DuringCooking_DisplayCleared()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverStartCancelButton.Press();
+            _driverStartCancelButton.Press();
+
+            _output.Received().OutputLine($"Display cleared");
+        }
+
+        [Test]
+        public void OnDoorOpened_DuringCooking_DisplayCleared()
+        {
+            _driverDoor.Open();
+            _driverDoor.Close();
+            for (int i = 0; i < 14; i++)
+            {
+                _driverPowerButton.Press();
+            }
+            _driverStartCancelButton.Press();
+            _driverDoor.Open();
+
+            _output.Received().OutputLine($"Display cleared");
+        }
+
+
 
     }
 }
