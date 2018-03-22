@@ -82,16 +82,16 @@ namespace MicrowaveOven.Test.Integration
         }
 
         [Test]
-        public void OnPowerPressed_9Times_ShowPower()
+        public void OnPowerPressed_16Times_ShowPower()
         {
             _driverDoor.Open();
             _driverDoor.Close();
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 15; i++)
             {
                 _driverPowerButton.Press();
             }
 
-            _output.Received().OutputLine($"Display shows: 100 W");
+            _output.Received(2).OutputLine($"Display shows: 50 W");
         }
 
         [Test]
