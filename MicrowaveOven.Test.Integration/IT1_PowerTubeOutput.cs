@@ -22,8 +22,8 @@ namespace MicrowaveOven.Test.Integration
             uut = new PowerTube(output);
         }
 
-        [TestCase(1)]
-        [TestCase(99)]
+        [TestCase(50)]
+        [TestCase(700)]
         public void TurnOn_WasOff_CorrectOutput(int power)
         {
             uut.TurnOn(power);

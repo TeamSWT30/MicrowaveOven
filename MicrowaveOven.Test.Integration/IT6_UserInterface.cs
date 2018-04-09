@@ -39,8 +39,9 @@ namespace MicrowaveOven.Test.Integration
             _driverTimeButton = new Button();
             _driverStartCancelButton = new Button();
             _driverDoor = new Door();
-            _uut = new UserInterface(_driverPowerButton, _driverTimeButton, _driverStartCancelButton, _driverDoor, _display, _light, _cookController);
             _cookController = new CookController(_timer, _display, _powerTube, _uut);
+            _uut = new UserInterface(_driverPowerButton, _driverTimeButton, _driverStartCancelButton, _driverDoor, _display, _light, _cookController);
+            
         }
 
         [Test]

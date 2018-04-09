@@ -35,7 +35,7 @@ namespace MicrowaveOven.Test.Integration
         [Test]
         public void StartCooking_ValidParameters_PowerTubeStarted()
         {
-            uut.StartCooking(50, 60);
+            uut.StartCooking(350, 60);
             output.Received().OutputLine($"PowerTube works with {50} %");
         }
 
@@ -44,7 +44,7 @@ namespace MicrowaveOven.Test.Integration
         {
             uut.StartCooking(50, 60);
 
-            timer.TimeRemaining.Returns(115);
+            timer.TimeRemaining.Returns(115000);
             timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
 
             output.Received().OutputLine($"Display shows: {1:D2}:{55:D2}");

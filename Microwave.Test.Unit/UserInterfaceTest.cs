@@ -247,7 +247,7 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Cooking_CookingIsDone_ClearDisplay()
+        public void Cooking_CookingIsDone_DoNotClearDisplay()
         {
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in SetPower
@@ -256,7 +256,7 @@ namespace Microwave.Test.Unit
             startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in cooking
 
-            display.Received(1).Clear();
+            display.DidNotReceive().Clear();
         }
 
         [Test]
